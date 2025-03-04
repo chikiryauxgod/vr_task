@@ -1,92 +1,37 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <memory>
+#include "figure.h"
 
+// Реализация методов классов
 
-using upf = std::unique_ptr<class Figure>;
+// Circle
+Circle::Circle(double r) : radius_{r} {}
 
-class Figure {
-    
-public:
+double Circle::Square() const {
+    return 3.14 * radius_ * radius_;
+}
 
-    virtual double Square() const = 0;
-    virtual ~Figure() = default;
+// Triangle
+Triangle::Triangle(double a, double b) : base_(a), height_(b) {}
 
-    bool operator<(const Figure& other) const {
-        return this->Square() < other.Square();
-    }
-};
+double Triangle::Square() const {
+    return (base_ * height_) / 2;
+}
 
-class Circle final : public Figure {
+// Rectangle
+Rectangle::Rectangle(double w, double h) : width_{w}, height_{h} {}
 
-public:
+double Rectangle::Square() const {
+    return width_ * height_;
+}
 
-    explicit Circle(double r) : radius_{r} {}
+// FigureFactory
+upf FigureFactory::CreateCircle(double radius) const {
+    return std::make_unique<Circle>(radius);
+}
 
-    double Square() const override {
-        return 3.14 * radius_ * radius_;
-    }
+upf FigureFactory::CreateTriangle(double base, double height) const {
+    return std::make_unique<Triangle>(base, height);
+}
 
-private:
-
-    double radius_ = 0;
-};
-
-class Triangle final : public Figure {
-
-public:
-
-    explicit Triangle(double a, double b) : base_(a), height_(b) {}
-
-    double Square() const override {
-		return ((base_ * height_) / 2);
-    }
-
-private:
-	double base_ = 0;
-	double height_ = 0;
-};
-
-class Rectangle final : public Figure {
-
-public:
-
-   	explicit Rectangle(double w, double h) : width_{w}, height_{h} {}
-
-    double Square() const override {
-        return width_ * height_;
-    }
-
-private:
-
-    double width_ = 0;
-    double height_ = 0;
-};
-
-class AbstractFigureFactory {
-
-public:
-
-    virtual upf CreateCircle(double radius) const = 0;
-    virtual upf CreateTriangle(double base, double height) const = 0;
-    virtual upf CreateRectangle(double width, double height) const = 0;
-    virtual ~AbstractFigureFactory() = default;
-};
-
-class FigureFactory final : public AbstractFigureFactory {
-
-public:
-
-    upf CreateCircle(double radius) const override {
-        return std::make_unique<Circle>(radius);
-    }
-
-    upf CreateTriangle(double base, double height) const override {
-        return std::make_unique<Triangle>(base, height);
-    }
-
-    upf CreateRectangle(double width, double height) const override {
-        return std::make_unique<Rectangle>(width, height);
-    }
-};
+upf FigureFactory::CreateRectangle(double width, double height) const {
+    return std::make_unique<Rectangle>(width, height);
+}

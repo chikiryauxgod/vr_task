@@ -5,7 +5,8 @@
 
 using upf = std::unique_ptr<class Figure>;
 
-class Figure {
+class Figure 
+{
 public:
     virtual double Square() const = 0;
     virtual ~Figure() = default;
@@ -15,7 +16,8 @@ public:
     }
 };
 
-class Circle final : public Figure {
+class Circle final : public Figure
+ {
 public:
     explicit Circle(double r);
     double Square() const override;
@@ -24,7 +26,8 @@ private:
     double radius_ = 0;
 };
 
-class Triangle final : public Figure {
+class Triangle final : public Figure 
+{
 public:
     explicit Triangle(double a, double b);
     double Square() const override;
@@ -34,7 +37,8 @@ private:
     double height_ = 0;
 };
 
-class Rectangle final : public Figure {
+class Rectangle final : public Figure 
+{
 public:
     explicit Rectangle(double w, double h);
     double Square() const override;
@@ -44,7 +48,8 @@ private:
     double height_ = 0;
 };
 
-class AbstractFigureFactory {
+class AbstractFigureFactory 
+{
 public:
     virtual upf CreateCircle(double radius) const = 0;
     virtual upf CreateTriangle(double base, double height) const = 0;
@@ -52,7 +57,8 @@ public:
     virtual ~AbstractFigureFactory() = default;
 };
 
-class FigureFactory final : public AbstractFigureFactory {
+class FigureFactory final : public AbstractFigureFactory 
+{
 public:
     upf CreateCircle(double radius) const override;
     upf CreateTriangle(double base, double height) const override;
