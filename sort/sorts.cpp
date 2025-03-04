@@ -26,6 +26,7 @@ void merge(vector& v, size_t left, size_t mid, size_t right)
 
 void merge_sort(vector& v, size_t left, size_t right, size_t depth)
 {
+	if (v.size() <= 1) return;
     if (left < right)
     {
         size_t mid = left + (right - left) / 2;
