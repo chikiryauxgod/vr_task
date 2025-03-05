@@ -89,13 +89,13 @@ TEST(SortTest, ParallelSort)
 {
     vector v = {5, 2, 9, 1, 5, 6};
     vector expected = {1, 2, 5, 5, 6, 9};
+    
+    vector bub_v(0), fast_v(0);
 
-    vector bub_v = v;
-    vector fast_v = v;
     vector merge_v = v;
 
-    std::thread t1([&](){bub_v = bubble_sort(bub_v);});
-    std::thread t2([&](){fast_v = fast_sort(fast_v);});
+    std::thread t1([&](){bub_v = bubble_sort(v);});
+    std::thread t2([&](){fast_v = fast_sort(v);});
     std::thread t3([&](){merge_sort(merge_v, 0, v.size() - 1, 0);});
 
     t1.join();
@@ -106,6 +106,7 @@ TEST(SortTest, ParallelSort)
     EXPECT_EQ(fast_v, expected);
     EXPECT_EQ(merge_v, expected);
 }
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
