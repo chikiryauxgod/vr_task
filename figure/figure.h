@@ -65,4 +65,4 @@ public:
     upf CreateRectangle(double width, double height) const override;
 };
 
-#endif // FIGURE_H
+#endif 
