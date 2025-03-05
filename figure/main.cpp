@@ -39,9 +39,9 @@ TEST(FigureTest, Comparison) {
         return *a < *b;
     });
 
-    // After sorting, the first element should be the triangle (smallest area)
+    // After sorting, the first element should be the triangle or rectangle (simmilar)
     EXPECT_EQ(figures[0]->Square(), 48);
-    // The second element should be the rectangle (next smallest area)
+    // The second element should be the  triangle or rectangle again (simmilar)
     EXPECT_EQ(figures[1]->Square(), 48);
     // The last element should be the circle (largest area)
     EXPECT_DOUBLE_EQ(figures[2]->Square(), 78.5);
