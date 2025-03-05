@@ -20,6 +20,7 @@
 Чтобы избежать гонки данных, вывод в терминал блокирован мьютексом;
 
 ```bash
+git clone https://github.com/chikiryauxgod/vr_task
 cd sort/
 g++  main.cpp sorts.cpp -lgtest -o test
 ./test
